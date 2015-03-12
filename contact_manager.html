@@ -1,0 +1,64 @@
+<head>
+  <title>contact_manager</title>
+  <link rel="stylesheet" type="text/css" href="client/semantic.min.css">
+</head>
+
+<body>
+ 	
+</body>
+
+<template name = "addContact">
+	<div class="container">
+		<div class="ui compact segment">
+			<form>
+				<label for="name">Name</label>
+				<div class="ui input">
+					<input type="text" name="name" id="name" required autofocus>
+				</div>
+				<br><br>
+				<label for="email">Email</label>
+				<div class="ui input">
+					<input type="email" name="email" id="email" required>
+				</div>
+				<br><br>
+				<label for="phone">Phone Number</label>
+				<div class="ui input">
+					<input type="tel" name="phone" id="phone" required>
+				</div>
+				<br><br>
+				<label for="address">Address</label>
+				<div class="ui input">
+					<input type="text" name="address" id="address" required>
+				</div>
+				<br><br>
+				<label for="image">Upload Image</label>
+				<div class="ui input">
+					<input type="file" name="image" id="image" disabled="disabled">
+				</div>
+				<br><br>
+				<div class="ui input">
+					<input type="submit" value="Submit" class="submit" >
+				</div>
+				<br><br>
+			</form>
+		</div>
+	</div>
+
+</template>
+
+
+<template name="home">
+		{{> loginButtons}}
+
+
+{{#if currentUser}}
+HI {{currentUser.username}}
+{{/if}}
+	<h2>Add a contact</h2>
+	
+	<nav>
+		<ul>
+			<li><a href="/addContact">Add a Contact</a></li>
+		</ul>
+	</nav>
+</template>
