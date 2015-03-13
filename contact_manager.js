@@ -7,10 +7,14 @@ Router.route('/addContact', function(){
   this.render('addContact');
 })
 
-Template.addContact.helpers({
+
+Template.home.helpers({
   foo: function () {
-    // ...
+    return Meteor.user().profile.name
   }
+  //, bar: function(){
+  //   if(Meteor.userId() == 
+  // }
 });
 
 Template.addContact.events({
@@ -22,17 +26,41 @@ Template.addContact.events({
     var newAddr = document.getElementById('address').value;
 
     console.log(newName, newEmail, newPhone, newAddr);
-
+if(! Meteor.userId()){
+      throw Meteor.Error("not-authorized");
+    }
     newContact.insert({
       name: newName,
       email_id: newEmail,
       phone: newPhone,
-      address: newAddr
+      address: newAddr,
+      createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username
     }, function(){
       console.log("Success");
+      window.location.replace('/')
     });
   }
 });
+
+Template.contactList.helpers({
+  contactname: function () {
+    return newContact.find({username: Meteor.user().username});
+  }
+});
+
+  Accounts.ui.config({
+    extraSignupFields: [{
+        fieldName: 'name',
+        fieldLabel: 'Full Name',
+        inputType: 'text',
+        visible: true,
+        saveToProfile: true
+    }],
+    passwordSignupFields: 'USERNAME_ONLY', 
+     requestPermissions: {}
+  });
 }
 
 if (Meteor.isServer) {

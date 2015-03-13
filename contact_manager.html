@@ -1,5 +1,5 @@
 <head>
-  <title>contact_manager</title>
+  <title>Contact Manager </title>
   <link rel="stylesheet" type="text/css" href="client/semantic.min.css">
 </head>
 
@@ -8,6 +8,11 @@
 </body>
 
 <template name = "addContact">
+<div class="ui inverted segment">
+  <h4 class="ui black header">
+    <a href="/">Back</a>
+  </h4>
+  </div>
 	<div class="container">
 		<div class="ui compact segment">
 			<form>
@@ -48,17 +53,46 @@
 
 
 <template name="home">
-		{{> loginButtons}}
 
+		<button class="ui button">{{> loginButtons}}</button>
 
 {{#if currentUser}}
-HI {{currentUser.username}}
-{{/if}}
+Hello, {{currentUser.profile.name}}
+
 	<h2>Add a contact</h2>
+	
 	
 	<nav>
 		<ul>
 			<li><a href="/addContact">Add a Contact</a></li>
 		</ul>
 	</nav>
+		
+		<div class="ui cards">{{> contactList}}</div>
+
+	{{/if}}
+</template>
+
+<template name="contactList">
+	
+	{{#each contactname}}
+	<div class="card">
+    <div class="content">
+      <div class="header">{{name}}</div>
+      <div class="description">
+        <b>Phone Number: </b><kbd>{{phone}}</kbd>
+       <p><b>Email Address: </b>
+       	<i>{{email_id}}</i>
+       </p>
+       <p> <b>Address: </b>
+       		<span class="comment">{{address}}</span>
+       </p>
+      </div>
+    </div>
+    <div class="ui bottom attached button edit">
+      Edit
+    </div>
+  </div>
+  {{/each}}
+
 </template>
