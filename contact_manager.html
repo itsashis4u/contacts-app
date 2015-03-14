@@ -1,6 +1,8 @@
 <head>
   <title>Contact Manager </title>
-  <link rel="stylesheet" type="text/css" href="client/semantic.min.css">
+  <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
+<link rel="icon" href="public/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="/semantic.min.css">
 </head>
 
 <body>
@@ -55,18 +57,14 @@
 <template name="home">
 
 		<button class="ui button">{{> loginButtons}}</button>
-
 {{#if currentUser}}
-Hello, {{currentUser.profile.name}}
-
-	<h2>Add a contact</h2>
+<h2><i class="alarm icon"></i>{{currentUser.profile.name}}</h2>
+<h4>You have {{bar}} Contacts</h4>
 	
+	<a href="/addContact"><div class="ui yellow button">
+		<i class="add user icon"></i>Add a Contact
+	</div></a> <br>
 	
-	<nav>
-		<ul>
-			<li><a href="/addContact">Add a Contact</a></li>
-		</ul>
-	</nav>
 		
 		<div class="ui cards">{{> contactList}}</div>
 
@@ -76,12 +74,17 @@ Hello, {{currentUser.profile.name}}
 <template name="contactList">
 	
 	{{#each contactname}}
-	<div class="card">
+	<div class="card {{foo}}">
     <div class="content">
-      <div class="header">{{name}}</div>
+    <i class="remove user icon" title="Delete Contact"></i>
+      <div class="header"><i class="user icon"></i>{{name}}</div>
       <div class="description">
-        <b>Phone Number: </b><kbd>{{phone}}</kbd>
-       <p><b>Email Address: </b>
+        <i class="call icon"></i>
+        <b>Phone Number: </b>
+        <kbd>{{phone}}</kbd>
+       <p>
+       <i class="mail icon"></i>
+       <b>Email Address: </b>
        	<i>{{email_id}}</i>
        </p>
        <p> <b>Address: </b>
@@ -90,7 +93,7 @@ Hello, {{currentUser.profile.name}}
       </div>
     </div>
     <div class="ui bottom attached button edit">
-      Edit
+      <i class="edit icon"></i>Edit
     </div>
   </div>
   {{/each}}

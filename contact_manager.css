@@ -3,3 +3,15 @@
 	right: 0 !important;
 	margin: 20px;
 }
+
+.selected{
+	background-color: #eee !important;	
+}
+
+i.remove.user.icon{
+	float: right;
+	cursor: pointer;
+}
+.card:hover > i.remove.user.icon{
+	display: block;
+}

@@ -12,9 +12,9 @@ Template.home.helpers({
   foo: function () {
     return Meteor.user().profile.name
   }
-  //, bar: function(){
-  //   if(Meteor.userId() == 
-  // }
+  , bar: function(){
+    return newContact.find({username: Meteor.user().username}).count();
+  }
 });
 
 Template.addContact.events({
@@ -37,16 +37,38 @@ if(! Meteor.userId()){
       createdAt: new Date(),
       owner: Meteor.userId(),
       username: Meteor.user().username
-    }, function(){
+    }, function(error){
+      if(!error){
       console.log("Success");
-      window.location.replace('/')
-    });
+      window.location.replace('/')}
+    }).distinct('phone',true);
   }
 });
 
 Template.contactList.helpers({
   contactname: function () {
-    return newContact.find({username: Meteor.user().username});
+    return newContact.find({username: Meteor.user().username}, {sort:{name:1}});
+  },
+  foo: function(){
+    var contactId = this._id;
+    var selectContact = Session.get('selectContact');
+    if(contactId == selectContact)
+    return "selected";
+  }
+});
+
+Template.contactList.events({
+  'click .card': function () {
+    var contactId = this._id;
+    Session.set('selectContact', contactId);
+  },
+  'click .remove.user.icon': function(){
+    var contactId = this._id;
+    Session.set('selectContact', contactId);
+    var selectContact = Session.get('selectContact');
+    var c = confirm(newContact.findOne(selectContact).name + " will be deleted");
+    if(c)
+      newContact.remove(selectContact);
   }
 });
 
