@@ -3,9 +3,8 @@
 	right: 0 !important;
 	margin: 20px;
 }
-
-.selected{
-	background-color: #eee !important;	
+.card{
+	cursor: pointer;
 }
 
 i.remove.user.icon{
@@ -14,4 +13,8 @@ i.remove.user.icon{
 }
 .card:hover > i.remove.user.icon{
 	display: block;
+}
+
+.selected{
+	background-color: #4CAF50 !important;	
 }

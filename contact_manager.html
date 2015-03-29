@@ -1,7 +1,7 @@
 <head>
   <title>Contact Manager </title>
-  <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
-<link rel="icon" href="public/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="/semantic.min.css">
 </head>
 
@@ -10,6 +10,7 @@
 </body>
 
 <template name = "addContact">
+	
 <div class="ui inverted segment">
   <h4 class="ui black header">
     <a href="/">Back</a>
@@ -20,22 +21,22 @@
 			<form>
 				<label for="name">Name</label>
 				<div class="ui input">
-					<input type="text" name="name" id="name" required autofocus>
+					<input type="text" name="name" id="name"  required autofocus>
 				</div>
 				<br><br>
 				<label for="email">Email</label>
 				<div class="ui input">
-					<input type="email" name="email" id="email" required>
+					<input type="email" name="email" id="email"   required>
 				</div>
 				<br><br>
 				<label for="phone">Phone Number</label>
 				<div class="ui input">
-					<input type="tel" name="phone" id="phone" required>
+					<input type="tel" name="phone" id="phone"   required>
 				</div>
 				<br><br>
 				<label for="address">Address</label>
 				<div class="ui input">
-					<input type="text" name="address" id="address" required>
+					<input type="text" name="address"  id="address" required>
 				</div>
 				<br><br>
 				<label for="image">Upload Image</label>
@@ -50,7 +51,6 @@
 			</form>
 		</div>
 	</div>
-
 </template>
 
 
@@ -58,7 +58,7 @@
 
 		<button class="ui button">{{> loginButtons}}</button>
 {{#if currentUser}}
-<h2><i class="alarm icon"></i>{{currentUser.profile.name}}</h2>
+<h2><i class="user icon"></i>{{currentUser.profile.name}}</h2>
 <h4>You have {{bar}} Contacts</h4>
 	
 	<a href="/addContact"><div class="ui yellow button">
@@ -67,8 +67,13 @@
 	
 		
 		<div class="ui cards">{{> contactList}}</div>
-
+	
 	{{/if}}
+
+	<!-- {# else if getdata}
+		{{> editContact}}
+
+	{{/if}} -->
 </template>
 
 <template name="contactList">
@@ -77,18 +82,18 @@
 	<div class="card {{foo}}">
     <div class="content">
     <i class="remove user icon" title="Delete Contact"></i>
-      <div class="header"><i class="user icon"></i>{{name}}</div>
+      <div class="header"><i class="user icon"></i><span id="title">{{name}}</span></div>
       <div class="description">
         <i class="call icon"></i>
         <b>Phone Number: </b>
-        <kbd>{{phone}}</kbd>
+        <kbd id = "phn">{{phone}}</kbd>
        <p>
        <i class="mail icon"></i>
        <b>Email Address: </b>
-       	<i>{{email_id}}</i>
+       	<i id="mail">{{email_id}}</i>
        </p>
        <p> <b>Address: </b>
-       		<span class="comment">{{address}}</span>
+       		<span id="comment">{{address}}</span>
        </p>
       </div>
     </div>
@@ -98,4 +103,49 @@
   </div>
   {{/each}}
 
+</template>
+
+<template name = "editContact">
+	{{#each a}}
+<div class="ui inverted segment">
+  <h4 class="ui black header">
+    <a href="/">Back</a>
+  </h4>
+  </div>
+	<div class="container">
+		<div class="ui compact segment">
+			<form>
+				<label for="name">Name</label>
+				<div class="ui input">
+					<input type="text" name="name" id="name" value="{{name}}" required autofocus>
+				</div>
+				<br><br>
+				<label for="email">Email</label>
+				<div class="ui input">
+					<input type="email" name="email" id="email"  value="{{email_id}}" required>
+				</div>
+				<br><br>
+				<label for="phone">Phone Number</label>
+				<div class="ui input">
+					<input type="tel" name="phone" id="phone"  value="{{phone}}" required>
+				</div>
+				<br><br>
+				<label for="address">Address</label>
+				<div class="ui input">
+					<input type="text" name="address" value="{{address}}" id="address" required>
+				</div>
+				<br><br>
+				<label for="image">Upload Image</label>
+				<div class="ui input">
+					<input type="file" name="image" id="image" disabled="disabled">
+				</div>
+				<br><br>
+				<div class="ui input">
+					<input type="submit" value="Submit" class="submit" >
+				</div>
+				<br><br>
+			</form>
+		</div>
+	</div>
+{{/each}}
 </template>
